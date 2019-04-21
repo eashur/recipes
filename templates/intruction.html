@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Intruction</title>
+</head>
+<body>
+    <h1>Instruction for {{recipe['rname']}}</h1>
+    <a href="/" class="header_text"> Log Out</a>
+    <h3>Description: </h3>
+    <span>{{recipe['description']}}</span>
+    <h3>Under 30 minutes: </h3>
+    <span>{{recipe['under_30']}}</span>
+    <h3>Instructions: </h3>
+    <span>{{recipe['instructions']}}</span>
+    <div>
+        <form action="/review" method="POST">
+            <p><input type="submit" name="go_back" value="Go BACk"> </p>
+        </form>
+        <form action="/delete" method = "POST" class="inline">
+            <input type="hidden" name = "recipe_id" value="{{recipe['id']}}">
+            <input type="submit" name = "delete" value="Delete">
+        </form>
+    </div>
+</body>
+</html>

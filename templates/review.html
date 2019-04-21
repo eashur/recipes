@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+</head>
+<body>
+    <div class="header">
+       
+        <h4 class="header_text">Welcome {{name}}</h4>
+        <a href="/" class="header_text"> Log Out</a>
+    </div>
+    <h1>These are your recipes: </h1>
+    <table class= "table table-striped table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Under 30 Minutes</th>
+            <th>Actions</th>
+        </tr>
+        {%for recipe in recipes%}
+        <tr>
+            <td>{{recipe["rname"]}}</td>
+            <td>{{recipe["description"]}}</td>
+            <td>{{recipe["under_30"]}}</td>
+            <td>
+                <form action="/instructions/{{recipe['id']}}" method = "POST" class="inline">
+                    <input type="hidden" name = "recipe_id" value="{{recipe['id']}}">
+                    <input type="submit" name = "view_instructions" value="View Instructions" class = "linkButton">
+                </form>
+                <form action="/delete" method = "POST" class="inline">
+                    <input type="hidden" name = "recipe_id" value="{{recipe['id']}}">
+                    <input type="submit" name = "delete" value="Delete" class = "linkButton">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
